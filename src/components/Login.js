@@ -45,16 +45,19 @@ let navigate = useNavigate()
                     showConfirmButton: false,
                     timer: 1000,
                     timerProgressBar: true,
-                    didOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
+                    // didOpen: (toast) => {
+                    //   toast.addEventListener('mouseenter', Swal.stopTimer)
+                    //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    // }
                   })
                   
                   Toast.fire({
                     icon: 'success',
                     title: 'Signed in successfully'
+
                   })
+
+                  localStorage.setItem("loggedin", JSON.stringify(checkData))
                 navigate("/details")
             }
         }

@@ -2,13 +2,19 @@ import { useState, useEffect, useRef} from 'react'
 import{useForm} from 'react-hook-form'
 import style from './style.css'
 import Swal from 'sweetalert2'
-import {FaUserTie,FaMailBulk,FaKey} from 'react-icons/fa'
+import {FaUserTie,FaMailBulk,FaKey,FaEye, FaEyeSlash} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 const Registration =()=>{
     // const [selected, setSelected] = useState("")
     //to store data in list
     // const [list, setList] = useState([])
     const {register,handleSubmit,reset} = useForm()
+    const [showP, setShowP] = useState(false)
+
+    const showpASS = (e)=>{
+        e.preventDefault()
+        setShowP(!showP)
+    }
 
 // useEffect(()=>{
 // // let currentData= [...list]
@@ -102,7 +108,7 @@ const Registration =()=>{
         <div className='regForm'> 
         <h1>SingUp</h1>
         <hr />
-       <form onSubmit={handleSubmit(onSubmit)}>
+       <form onSubmit={handleSubmit(onSubmit)} className='registrationForm'>
         {/* <label htmlFor="profile">Profile:</label> <br />
         <input style={{display : "none"}} type="file" accept='image/*' ref={imageRef} required  />
         <button onClick={imageHandler}>Upload</button>
@@ -112,7 +118,15 @@ const Registration =()=>{
        <label htmlFor="email"><FaMailBulk/> Email:</label> <br />
         <input type="email" placeholder='imbhanubista@gmail.com' required {...register("email")} /> <br />
         <label htmlFor="password"> <FaKey/> Password: </label> <br />
-        <input type="password" placeholder='e.g xXyYmOd' required {...register("password")} /> <br />
+        <input type= {
+            showP? "text" :"password"
+        } placeholder='e.g xXyYmOd' required {...register("password")} /> 
+        <button onClick={showpASS}> 
+        {
+            showP?  <FaEyeSlash/> : <FaEye/>
+        }
+         </button>
+        <br />
         <label htmlFor="rpassword"><FaKey/> Conform Password:</label><br />
         <input type="password" placeholder='e.g xXyYmOd' required {...register("rpassword")} /> <br /> 
         <input type="submit" className='submitbtn' value={"Sign Up"} /> 
